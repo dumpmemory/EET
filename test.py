@@ -10,11 +10,11 @@ max_length = 100
 def main():
     torch.set_grad_enabled(False)
 
-    model_dir = "/root/data/models/test_ttg_t5/"
+    model_dir = "/root/data/models/0721_t5_epoch5/"
 
     tokenizer = AutoTokenizer.from_pretrained(model_dir)
     model = T5ForConditionalGeneration.from_pretrained(model_dir, from_flax=False).to('cuda:0')
-    eet_model = EETT5ForConditionalGeneration.from_pretrained(model_dir, max_batch=10, full_seq_len=100, data_type=torch.float16)
+    eet_model = EETT5ForConditionalGeneration.from_pretrained(model_dir, max_batch=10, data_type=torch.float32)
 
     input_str = "少侠路过码头时，一位船夫哽咽着向少侠求救：“少侠，我两年前出海时答应过儿子会给他带一把铁木剑，可船靠岸时那把剑不小心掉水里了，我沿着船舷上刻的记号找了许久也没找到， \
     # 这可如何是好？”少侠说：“帮你下水去捞。”<extra_id_0>船夫的儿子获得了铁木剑，十分开心。</s>"
